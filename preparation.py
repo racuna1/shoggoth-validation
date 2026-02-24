@@ -7,7 +7,7 @@ Requires a local configuration to be specified, see after imports.
 
 The most common task is to generate JSON for a folder of submissions. The typical workflow is:
 1) Use rename_canvas_submission_files to do initial processing (module_0raw -> module_1renamed).
-2) Make a manual copy of module_0raw to module_2patched.
+2) Make a manual copy of module_1renamed to module_2patched.
 3) Make any needed corrections to the files in module_2patched.
 4) Run run_shoggoth_bulk to run the local shoggoth to generate JSON for all submissions.
 
@@ -213,4 +213,7 @@ if __name__ == '__main__':
     #run_shoggoth_bulk("ser334", Language.C, constants.FOLDER_DATA_ORIGINAL + os.sep + "ser334_config_m2.json", "24sc")
 
     #SER334 M3 (developmental test set)
-    run_shoggoth_bulk("ser334", Language.C, constants.FOLDER_DATA_ORIGINAL + os.sep + "ser334_config_m3.json", "00dv")
+    #run_shoggoth_bulk("ser334", Language.C, constants.FOLDER_DATA_ORIGINAL + os.sep + "ser334_config_m3.json", "00dv")
+
+    #fall c 2024
+    run_shoggoth_bulk("ser334", Language.C, constants.FOLDER_DATA_ORIGINAL + os.sep + "ser334_config_m3.json", "24fc")
