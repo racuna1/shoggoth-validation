@@ -8,9 +8,10 @@ from GAVEL.app.dtos.gradescope import (
     GradescopeSubmitter,
     GradescopeTestScore
 )
+from GAVEL.app.ports.gradescope_reader import GradescopeReader
 
 
-class YamlGradescopeReader:
+class YamlGradescopeReader(GradescopeReader):
     """Prototype reader for Gradescope YAML exports."""
 
     def read(self, path: Path) -> List[GradescopeSubmission]:
@@ -19,12 +20,12 @@ class YamlGradescopeReader:
         submissions = []
 
         for submission_key, submission_obj in data.items():
-            submitter_raw = submission_obj["submitters"][0]
+            submitter_data = submission_obj[":submitters"][0]
 
             submitter = GradescopeSubmitter(
-                sid=str(submitter_raw["sid"]),
-                email=str(submitter_raw["email"]),
-                name=str(submitter_raw["name"])
+                sid=str(submitter_data[":sid"]),
+                email=str(submitter_data[":email"]),
+                name=str(submitter_data[":name"])
             )
 
             tests = [
@@ -34,14 +35,14 @@ class YamlGradescopeReader:
                     max_score=test.get("max_score"),
                     number=test.get("number"),
                 )
-                for test in submission_obj["results"]["tests"]
+                for test in submission_obj[":results"]["tests"]
             ]
 
             submissions.append(
                 GradescopeSubmission(
                     submission_key=submission_key,
                     submitter=submitter,
-                    created_at=submission_obj["created_at"],
+                    created_at=submission_obj[":created_at"],
                     tests=tests,
                 )
             )
