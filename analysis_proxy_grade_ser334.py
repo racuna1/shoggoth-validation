@@ -6,6 +6,7 @@ See analysis_proxy_grade_ser222.py for details.
 __author__ = "Ruben Acuna"
 __author__ = "Kyle Burnett"
 __author__ = "Michael Deitch"
+__author__ = "Sarath Kumar Dunga"
 
 from analysis_proxy_grade_util import was_test_passed_by_name
 
@@ -515,6 +516,17 @@ def compute_proxies_m6_25fc(data):
     if t1_1 and t1_2:
         proxies += [1.0]
         proxies += [1.0]
+    else:
+        proxies += [0.0]
+        proxies += [0.0]
+
+    # 3) Filter Selection (1 pt; full/half/0)
+    if t1_1 and t1_2:
+        proxies += [1.0]
+    elif t1_1 or t1_2:
+        proxies += [0.5]
+    else:
+        proxies += [0.0]
     
     # 2) Blur Filter
     # For the Blur Algorithm Points: Partial credit if one of the two passes, full credit if both do
@@ -531,8 +543,19 @@ def compute_proxies_m6_25fc(data):
     else:
         proxies += [0.0]
     
+    # Blur: Threaded Algorithm (use FTC blur checks)
+    ftc_b1 = was_test_passed_by_name(data, "FTC_Blur Check 1")
+    ftc_b2 = was_test_passed_by_name(data, "FTC_Blur Check 2")
+    ftc_b3 = was_test_passed_by_name(data, "FTC_Blur Check 3")
+    passed_blur_ftc = sum([ftc_b1, ftc_b2, ftc_b3])
+    if passed_blur_ftc == 3:
+        proxies += [5.0]
+    elif passed_blur_ftc > 0:
+        proxies += [2.5]
+    else:
+        proxies += [0.0]
+
     # Automatic failures for:
-    proxies += [0.0] # Blur: Threaded Algorithm
     proxies += [0.0] # Blur: Balanced Algorithm
     proxies += [0.0] # Blur: Independent Memory
     proxies += [0.0] # Blur: Padded Memory
@@ -563,6 +586,20 @@ def compute_proxies_m6_25fc(data):
     else:
         proxies += [0.0]
 
-    proxies += [0.0] # Swiss Cheese: Threaded Algorithm
+    # Swiss Cheese: Threaded Algorithm (FTC Swiss checks)
+    ftc_s1 = was_test_passed_by_name(data, "FTC_Swiss Check 1")
+    ftc_s2 = was_test_passed_by_name(data, "FTC_Swiss Check 2")
+    ftc_s3 = was_test_passed_by_name(data, "FTC_Swiss Check 3")
+    passed_swiss_ftc = sum([ftc_s1, ftc_s2, ftc_s3])
+    if passed_swiss_ftc == 3:
+        proxies += [5.0]
+    elif passed_swiss_ftc > 0:
+        proxies += [2.5]
+    else:
+        proxies += [0.0]
+
     proxies += [0.0] # Swiss Cheese: Data Splitting Algorithm
     proxies += [0.0] # Swiss Cheese: Independent Memory
+
+    total_proxy_score = sum([ps for ps in proxies if ps is not None])
+    return proxies, total_proxy_score
