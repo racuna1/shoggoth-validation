@@ -410,7 +410,7 @@ def compute_proxies_m9_25fc(data):
         proxies += [0.0]
 
     # 2) SJF: Simulation
-    # Full credit if display and simulate, half if just simulate
+    # Full credit if display and simulate, half if just display
 
     t2_1 = was_test_passed_by_name(data, "SJF Test Display Ticks")
     t2_2 = was_test_passed_by_name(data, "SJF Test Simulate Ticks")
@@ -451,7 +451,7 @@ def compute_proxies_m9_25fc(data):
         proxies += [0.0]
 
     # 5) SJFL: Simulation
-    # Full credit if display and simulate, half if just simulate
+    # Full credit if display and simulate, half if just display
 
     t3_1 = was_test_passed_by_name(data, "SJFL Test Display Ticks")
     t3_2 = was_test_passed_by_name(data, "SJFL Test Simulate Ticks")
