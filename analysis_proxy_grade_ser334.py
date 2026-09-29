@@ -202,8 +202,10 @@ def compute_proxies_m3_24fc(data):
     t9_2 = was_test_passed_by_name(data, "9.2)") # "9.2) Program Input 2 [Hint: Output file matches argument.]"
     
     t9_3 = was_test_passed_by_name(data, "9.3)") # "9.3) Program Input 3 [Hint: Input File Does not Exist.]"
+
+    t16_1 = was_test_passed_by_name(data, "16.1)")  # "16.1) Program argument parsing [Hint: handle all permutations of argument ordering] ]"
     
-    if t9_1 and t9_2 and t9_3:
+    if t9_1 and t9_2 and t9_3 and t16_1:
         proxies += [4.0]
     elif ((t9_1 and t9_2) or (t9_1 and t9_3) or (t9_2 and t9_3)):
         proxies += [2.0]
@@ -214,8 +216,10 @@ def compute_proxies_m3_24fc(data):
     #4) Input Validation
     t10_1 = was_test_passed_by_name(data, "10.1)") # "10.1) Program Input 4 [Hint: Color Arguments.]"
     
-    if t10_1:
+    if t10_1 and t16_1:
         proxies += [4.0]
+    elif t10_1:
+        proxies += [2.0]
     else:
         proxies += [0.0]
     
@@ -378,11 +382,13 @@ def compute_proxies_m3_24fc(data):
     else:
         proxies += [0.0]
     
-    
+    # NOTE: the original rubric and assignment PDF (last used spring 2024) did not specify any specific requirements
+    #       relating to memory management. Consequently, the 15.x series of unit tests are uncleared in this mapping.
     
     total_score_proxy = sum([ps for ps in proxies if ps])
 
     return proxies, total_score_proxy
+
 
 def compute_proxies_m9_25fc(data):
 
