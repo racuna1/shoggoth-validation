@@ -27,8 +27,8 @@ def compute_proxies_m2_24sc(data):
         proxies += [0.0]
 
     # 2) memory leaks [2pts]
-    t2_1 = was_test_passed_by_name(data, "Memory Allocation 3") # 7.3) Memory Allocation 3 [Hint: Frees all Memory on close.]
-    t2_2 = was_test_passed_by_name(data, "Memory Allocation 4") # 7.4) Memory Allocation 4 [Hint: Frees Correct Memory addresses on close.]
+    t2_1 = was_test_passed_by_name(data, "Memory Allocation 2") # 7.3) Memory Allocation 3 [Hint: Frees all Memory on close.]
+    t2_2 = was_test_passed_by_name(data, "Memory Allocation 3") # 7.4) Memory Allocation 4 [Hint: Frees Correct Memory addresses on close.]
 
     if t2_1 and t2_2:
         proxies += [2.0]
@@ -57,11 +57,11 @@ def compute_proxies_m2_24sc(data):
 
     # 4) course_insert::memory [2pts]
     t4_1 = was_test_passed_by_name(data, "Memory Allocation 1") # 7.1) Memory Allocation 1 [Hint: Uses Malloc when creating courses.]
-    t4_2 = was_test_passed_by_name(data, "Memory Allocation 2")  # 7.2) Memory Allocation 2 [Hint: Frees memory from creating a course.]
-    if t4_1 and t4_2:
+    #t4_2 = was_test_passed_by_name(data, "Memory Allocation 2")  # 7.2) Memory Allocation 2 [Hint: Frees memory from creating a course.]
+    if t4_1:
         proxies += [2.0]
-    elif t4_1:
-        proxies += [1.0]
+    #elif t4_1: # TODO: can we recover partial credit here?
+    #    proxies += [1.0]
     else:
         proxies += [0.0]
 
@@ -90,8 +90,8 @@ def compute_proxies_m2_24sc(data):
         proxies += [0.0]
 
     # 7) course_drop::memory [2pts]
-    t7_1 = was_test_passed_by_name(data, "Memory Allocation 5") # 7.4) Memory Allocation 5 [Hint: Frees Memory when removing courses.]
-    t7_2 = was_test_passed_by_name(data, "Memory Allocation 6") # 7.5) Memory Allocation 6 [Hint: Frees Correct Memory addresses when removing courses.]
+    t7_1 = was_test_passed_by_name(data, "Memory Allocation 4") # 7.4) Memory Allocation 5 [Hint: Frees Memory when removing courses.]
+    t7_2 = was_test_passed_by_name(data, "Memory Allocation 5") # 7.5) Memory Allocation 6 [Hint: Frees Correct Memory addresses when removing courses.]
 
     if t7_1 and t7_2:
         proxies += [2.0]
